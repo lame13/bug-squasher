@@ -1,0 +1,379 @@
+@import "tailwindcss";
+
+:root {
+  --background: #090d10;
+  --foreground: #eef7ef;
+  --muted: #9aa8a1;
+  --line: rgba(223, 255, 234, 0.14);
+  --panel: rgba(14, 20, 22, 0.86);
+  --green: #77ffb3;
+  --amber: #ffd166;
+  --red: #ff637d;
+  --cyan: #5fd0ff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: Arial, Helvetica, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
+* {
+  box-sizing: border-box;
+  letter-spacing: 0;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+button {
+  font: inherit;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 3px;
+}
+
+.game-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 18px;
+  padding: 22px;
+  background:
+    linear-gradient(135deg, rgba(119, 255, 179, 0.08), transparent 34%),
+    linear-gradient(315deg, rgba(255, 99, 125, 0.08), transparent 38%),
+    #090d10;
+}
+
+.game-header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.kicker,
+.overlay-kicker {
+  margin: 0 0 6px;
+  color: var(--amber);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.game-header h1 {
+  margin: 0;
+  color: var(--foreground);
+  font-size: 2rem;
+  line-height: 1.1;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 0 13px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(8, 12, 15, 0.68);
+  color: #dfffea;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--muted);
+  box-shadow: 0 0 0 4px rgba(154, 168, 161, 0.12);
+}
+
+.status-dot-playing {
+  background: var(--green);
+  box-shadow: 0 0 0 4px rgba(119, 255, 179, 0.15);
+}
+
+.status-dot-paused {
+  background: var(--amber);
+  box-shadow: 0 0 0 4px rgba(255, 209, 102, 0.14);
+}
+
+.status-dot-gameOver {
+  background: var(--red);
+  box-shadow: 0 0 0 4px rgba(255, 99, 125, 0.14);
+}
+
+.game-shell {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 18px;
+  align-items: stretch;
+}
+
+.stage-panel {
+  position: relative;
+  min-height: 420px;
+  height: min(72vh, 760px);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #0b1012;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.36);
+}
+
+.game-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+  touch-action: manipulation;
+}
+
+.game-overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(6, 9, 11, 0.42);
+}
+
+.overlay-panel {
+  width: min(420px, 100%);
+  padding: 24px;
+  border: 1px solid rgba(223, 255, 234, 0.18);
+  border-radius: 8px;
+  background: rgba(10, 15, 17, 0.9);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.34);
+}
+
+.overlay-panel h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 1.7rem;
+  line-height: 1.12;
+}
+
+.overlay-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 18px 0;
+  color: #d7e6dc;
+  font-size: 0.9rem;
+}
+
+.overlay-stats span {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.primary-button,
+.secondary-button {
+  min-height: 42px;
+  border: 0;
+  border-radius: 8px;
+  color: #06100b;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.primary-button {
+  width: 100%;
+  background: var(--green);
+}
+
+.primary-button:hover {
+  background: #a0ffc9;
+}
+
+.control-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.hud-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.hud-tile,
+.uptime-panel,
+.bug-list,
+.squash-count {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.hud-tile {
+  min-height: 74px;
+  padding: 13px;
+}
+
+.hud-tile span,
+.panel-row span,
+.squash-count span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.hud-tile strong {
+  display: block;
+  margin-top: 7px;
+  color: #ffffff;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.uptime-panel {
+  padding: 14px;
+}
+
+.panel-row,
+.squash-count {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.panel-row strong,
+.squash-count strong {
+  color: #ffffff;
+  font-size: 1.1rem;
+}
+
+.health-track {
+  height: 12px;
+  margin-top: 12px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.health-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--red), var(--amber), var(--green));
+  transition: width 160ms ease;
+}
+
+.button-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.secondary-button {
+  border: 1px solid rgba(223, 255, 234, 0.18);
+  background: #e7f2ea;
+}
+
+.secondary-button:hover:not(:disabled) {
+  background: #ffffff;
+}
+
+.secondary-button:disabled {
+  color: rgba(6, 16, 11, 0.45);
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.bug-list {
+  padding: 8px;
+}
+
+.bug-row {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 9px;
+  min-height: 38px;
+  padding: 0 6px;
+  color: #e9f4ed;
+  font-size: 0.88rem;
+}
+
+.bug-row strong {
+  color: var(--amber);
+  font-size: 0.82rem;
+}
+
+.bug-swatch {
+  width: 16px;
+  height: 16px;
+  border: 2px solid;
+  border-radius: 999px;
+}
+
+.squash-count {
+  min-height: 54px;
+  padding: 0 14px;
+}
+
+@media (max-width: 980px) {
+  .game-page {
+    padding: 16px;
+  }
+
+  .game-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .stage-panel {
+    height: min(62vh, 620px);
+  }
+
+  .control-panel {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .bug-list,
+  .squash-count {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .game-header {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .stage-panel {
+    min-height: 360px;
+    height: 56vh;
+  }
+
+  .control-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .bug-list,
+  .squash-count {
+    grid-column: auto;
+  }
+}

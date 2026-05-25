@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Bug Squasher icon</title>
+  <desc id="desc">A stylized production bug over a server screen.</desc>
+  <rect width="64" height="64" rx="14" fill="#090d10"/>
+  <path d="M12 42h40v8a4 4 0 0 1-4 4H16a4 4 0 0 1-4-4z" fill="#15251e" stroke="#77ffb3" stroke-width="3"/>
+  <path d="M17 46h16" stroke="#ffd166" stroke-width="3" stroke-linecap="round"/>
+  <path d="M38 46h9" stroke="#5fd0ff" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="32" cy="27" rx="14" ry="11" fill="#1e6f36"/>
+  <ellipse cx="34" cy="27" rx="9" ry="7" fill="#7be36f"/>
+  <path d="M21 23l-7-5M20 28l-8 1M22 33l-7 5M43 23l7-5M44 28l8 1M42 33l7 5" stroke="#1e6f36" stroke-width="4" stroke-linecap="round"/>
+  <path d="M27 20l-4-6M37 20l4-6" stroke="#77ffb3" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="28" cy="26" r="2" fill="#dfffea"/>
+  <circle cx="39" cy="26" r="2" fill="#dfffea"/>
+  <path d="M28 32c3 2 6 2 9 0" stroke="#0b1710" stroke-width="2" stroke-linecap="round"/>
+</svg>
